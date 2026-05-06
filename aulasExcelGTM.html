@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Excel do Básico ao Intermediário — Aulas e Exercícios (Material para PDF)</title>
+
+  <!-- Fonte externa (opcional). Se estiver offline, cairá em Arial/Helvetica. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --azul-escuro:#0b2a4a;
+      --azul:#1f6feb;
+      --azul-claro:#eaf2ff;
+      --cinza-1:#0f172a;
+      --cinza-2:#334155;
+      --cinza-3:#64748b;
+      --cinza-4:#cbd5e1;
+      --cinza-5:#eef2f7;
+      --branco:#ffffff;
+      --verde:#0f9d58;
+      --amarelo:#f59e0b;
+      --vermelho:#ef4444;
+      --borda:#d9e2ef;
+      --sombra: 0 10px 25px rgba(15, 23, 42, .08);
+      --raio: 14px;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{
+      margin:0;
+      padding:0;
+      color:var(--cinza-1);
+      background:linear-gradient(180deg, #f7fbff 0%, #ffffff 40%, #ffffff 100%);
+      font-family: Roboto, Arial, Helvetica, sans-serif;
+      line-height:1.6;
+    }
+
+    /* Layout */
+    .page{
+      width:min(1080px, 92vw);
+      margin: 28px auto 80px;
+    }
+
+    /* Capa */
+    .cover{
+      background: radial-gradient(1200px 700px at 0% 0%, rgba(31,111,235,.18), transparent 55%),
+                  radial-gradient(900px 600px at 100% 0%, rgba(15,157,88,.12), transparent 55%),
+                  linear-gradient(180deg, #ffffff 0%, #f6f9ff 100%);
+      border:1px solid var(--borda);
+      border-radius: var(--raio);
+      box-shadow: var(--sombra);
+      padding: 42px 44px;
+      position: relative;
+      overflow:hidden;
+    }
+    .badge{
+      display:inline-block;
+      background: rgba(31,111,235,.10);
+      color: var(--azul);
+      border:1px solid rgba(31,111,235,.25);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      font-size: 13px;
+    }
+    .cover h1{
+      margin: 14px 0 8px;
+      font-size: 42px;
+      line-height:1.15;
+      color: var(--azul-escuro);
+    }
+    .cover h2{
+      margin: 0 0 18px;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--cinza-2);
+      max-width: 70ch;
+    }
+    .cover .meta{
+      margin-top: 18px;
+      display:flex;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background: var(--branco);
+      border:1px solid var(--borda);
+      padding: 10px 12px;
+      border-radius: 999px;
+      color: var(--cinza-2);
+      font-size: 13px;
+    }
+    .pill strong{ color: var(--cinza-1); }
+    .cover .note{
+      margin-top: 18px;
+      background: rgba(15,157,88,.08);
+      border: 1px solid rgba(15,157,88,.18);
+      padding: 12px 14px;
+      border-radius: 12px;
+      color: #0b3b22;
+      max-width: 95ch;
+    }
+
+    /* Sumário */
+    .toc{
+      margin-top: 22px;
+      background: var(--branco);
+      border:1px solid var(--borda);
+      border-radius: var(--raio);
+      box-shadow: var(--sombra);
+      padding: 18px 18px 8px;
+    }
+    .toc h3{
+      margin:0 0 10px;
+      font-size: 16px;
+      color: var(--azul-escuro);
+    }
+    .toc ol{
+      margin: 0 0 10px 18px;
+      padding:0;
+      columns: 2;
+      column-gap: 36px;
+    }
+    .toc li{ margin: 8px 0; break-inside: avoid; }
+    .toc a{
+      color: var(--azul);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(31,111,235,.45);
+    }
+    .toc a:hover{ border-bottom-style: solid; }
+
+    /* Seções */
+    section.module{
+      margin-top: 26px;
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: var(--raio);
+      box-shadow: var(--sombra);
+      padding: 26px 24px;
+      position: relative;
+    }
+    .module-header{
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      justify-content: space-between;
+      flex-wrap:wrap;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--cinza-5);
+      margin-bottom: 18px;
+    }
+    .module h2{
+      margin:0;
+      color: var(--azul-escuro);
+      font-size: 22px;
+      line-height:1.25;
+    }
+    .module .subtitle{
+      margin: 6px 0 0;
+      color: var(--cinza-3);
+      max-width: 90ch;
+      font-size: 14px;
+    }
+
+    .tag{
+      display:inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--cinza-2);
+      background: var(--cinza-5);
+      border:1px solid var(--borda);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space:nowrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items:start;
+    }
+    @media (max-width: 920px){
+      .grid{ grid-template-columns: 1fr; }
+      .toc ol{ columns:1; }
+    }
+
+    /* Blocos didáticos */
+    .card{
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      padding: 16px 16px;
+      background: linear-gradient(180deg, #ffffff, #fbfdff);
+    }
+    .card h3{
+      margin:0 0 10px;
+      font-size: 16px;
+      color: var(--cinza-1);
+    }
+    .card p{ margin: 10px 0; color: var(--cinza-2); }
+    .card ul{ margin: 8px 0 0 20px; }
+    .card li{ margin: 6px 0; color: var(--cinza-2); }
+
+    .callout{
+      border-radius: 14px;
+      padding: 14px 14px;
+      margin: 12px 0;
+      border: 1px solid var(--borda);
+      background: #fff;
+    }
+    .callout .title{
+      font-weight: 800;
+      margin-bottom: 6px;
+      letter-spacing: .01em;
+    }
+    .callout.tip{ background: rgba(31,111,235,.08); border-color: rgba(31,111,235,.18); }
+    .callout.tip .title{ color: var(--azul); }
+
+    .callout.attn{ background: rgba(245,158,11,.10); border-color: rgba(245,158,11,.25); }
+    .callout.attn .title{ color: #7a4b00; }
+
+    .callout.example{ background: rgba(15,157,88,.08); border-color: rgba(15,157,88,.20); }
+    .callout.example .title{ color: #0b3b22; }
+
+    /* Imagens */
+    figure{
+      margin:0;
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      overflow:hidden;
+      background: #fff;
+    }
+    figure img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+    figcaption{
+      padding: 10px 12px;
+      font-size: 12px;
+      color: var(--cinza-3);
+      border-top:1px solid var(--cinza-5);
+      background: #fbfdff;
+    }
+    .img-hint{
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--cinza-3);
+    }
+
+    /* Tabelas (para exercícios) */
+    table{
+      width:100%;
+      border-collapse: collapse;
+      margin: 10px 0 8px;
+      font-size: 13px;
+    }
+    th, td{
+      border: 1px solid var(--borda);
+      padding: 10px 10px;
+      text-align:left;
+      vertical-align: top;
+    }
+    th{
+      background: var(--azul-claro);
+      color: var(--azul-escuro);
+      font-weight: 800;
+    }
+    .answer-box{
+      border: 2px dashed rgba(100,116,139,.55);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fcfdff;
+      color: var(--cinza-3);
+      margin-top: 10px;
+    }
+
+    details{
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #ffffff;
+      margin: 10px 0 0;
+    }
+    summary{
+      cursor: pointer;
+      font-weight: 800;
+      color: var(--azul-escuro);
+      outline: none;
+    }
+    .steps{
+      margin: 10px 0 0 18px;
+      color: var(--cinza-2);
+    }
+    .steps li{ margin: 7px 0; }
+
+    /* Código/atalhos */
+    kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      border: 1px solid var(--borda);
+      background: #fff;
+      padding: 2px 6px;
+      border-radius: 7px;
+      color: var(--cinza-2);
+      box-shadow: 0 1px 0 rgba(15,23,42,.06);
+    }
+
+    .mini{
+      font-size: 13px;
+      color: var(--cinza-3);
+    }
+
+    /* Rodapé de impressão */
+    @media print{
+      body{ background:#fff; }
+      .page{ margin:0; width:100%; }
+      .cover, .toc, section.module{ box-shadow:none; }
+      a{ color: inherit; text-decoration:none; }
+      details{ break-inside: avoid; }
+      section.module{ page-break-inside: avoid; }
+      .no-print{ display:none !important; }
+
+      /* Margens do PDF (ajuste ao seu gosto) */
+      @page { margin: 16mm; }
+
+      /* Rodapé simples */
+      footer.print-footer{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 6mm 16mm;
+        font-size: 10px;
+        color: #475569;
+        border-top: 1px solid #e2e8f0;
+        background: rgba(255,255,255,.95);
+      }
+    }
+
+    footer.print-footer{
+      display:none;
+    }
+
+    /* Header de seção */
+    .toc, section.module{ scroll-margin-top: 20px; }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <!-- CAPA -->
+    <header class="cover" id="capa">
+      <span class="badge">Material de Treinamento • Excel • Do zero ao intermediário</span>
+      <h1>Excel do Básico ao Intermediário</h1>
+      <h2>
+        Apostila prática com explicações passo a passo, exemplos do dia a dia, exercícios por módulo e gabarito detalhado.
+        Ideal para quem <strong>nunca usou</strong> o Excel e precisa ganhar confiança rapidamente.
+      </h2>
+
+      <div class="meta">
+        <div class="pill"><strong>Público:</strong> iniciante absoluto</div>
+        <div class="pill"><strong>Formato:</strong> HTML → PDF</div>
+        <div class="pill"><strong>Conteúdo:</strong> aulas + exercícios + gabarito</div>
+        <div class="pill"><strong>Dica:</strong> pratique digitando, não só lendo</div>
+      </div>
+
+      <div class="note">
+        <strong>Como usar esta apostila:</strong> leia cada tópico e, logo em seguida, faça o exercício do módulo.
+        Se errar, ótimo: use o gabarito para refazer o caminho e aprender o “porquê”.
+      </div>
+    </header>
+
+    <!-- SUMÁRIO -->
+    <nav class="toc" aria-label="Sumário">
+      <h3>Sumário (clique para ir ao módulo)</h3>
+      <ol>
+        <li><a href="#modulo1">Módulo 1 — Introdução ao Excel (Básico do Básico)</a></li>
+        <li><a href="#modulo2">Módulo 2 — Primeiros Passos (Formatação e ajustes)</a></li>
+        <li><a href="#modulo3">Módulo 3 — Fórmulas Básicas</a></li>
+        <li><a href="#modulo4">Módulo 4 — Funções Intermediárias</a></li>
+        <li><a href="#modulo5">Módulo 5 — Organização e Apresentação de Dados</a></li>
+        <li><a href="#modulo6">Módulo 6 — Exercícios Práticos (consolidado)</a></li>
+      </ol>
+      <p class="mini">
+        Atalho útil: no Excel, pressione <kbd>Ctrl</kbd> + <kbd>Z</kbd> para desfazer e <kbd>Ctrl</kbd> + <kbd>S</kbd> para salvar.
+      </p>
+    </nav>
+
+    <!-- MÓDULO 1 -->
+    <section class="module" id="modulo1">
+      <div class="module-header">
+        <div>
+          <h2>MÓDULO 1 — Introdução ao Excel (Básico do Básico)</h2>
+          <p class="subtitle">
+            Objetivo: entender para que o Excel serve, conhecer a tela (interface) e realizar as primeiras ações:
+            abrir, digitar, editar e salvar corretamente um arquivo.
+          </p>
+        </div>
+        <span class="tag">Nível: Iniciante absoluto</span>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>1) O que é o Excel e para que serve</h3>
+          <p>
+            O <strong>Microsoft Excel</strong> é um programa para trabalhar com <strong>planilhas</strong>.
+            Ele é usado para organizar informações, fazer cálculos, criar relatórios e gráficos.
+          </p>
+          <ul>
+            <li><strong>Organizar dados:</strong> lista de clientes, produtos, contas, presença, agenda.</li>
+            <li><strong>Calcular:</strong> somas, médias, percentuais, comissões, custos.</li>
+            <li><strong>Analisar:</strong> filtrar, classificar e destacar informações importantes.</li>
+            <li><strong>Apresentar:</strong> gráficos e tabelas bonitas para mostrar resultados.</li>
+          </ul>
+
+          <div class="callout example">
+            <div class="title">Exemplo do cotidiano</div>
+            <div>
+              Você pode criar uma planilha de <strong>controle de gastos</strong> (data, categoria, valor)
+              e o Excel soma tudo automaticamente e ainda faz um gráfico por categoria.
+            </div>
+          </div>
+
+          <div class="callout tip">
+            <div class="title">💡 Dica</div>
+            <div>
+              Para aprender rápido, pratique com coisas reais do trabalho: lista de serviços, controle de estoque,
+              contatos, metas semanais.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Imagem: Excel (exemplo de interface)</h3>
+          <figure>
+            <!-- Imagem pública (Wikimedia). Pode variar conforme versão do Excel. -->
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/7/73/Microsoft_Excel_2013.png"
+              alt="Captura de tela do Microsoft Excel mostrando grade de células e a faixa de opções"
+              loading="lazy"
+            />
+            <figcaption>
+              Exemplo de tela do Excel (pode mudar um pouco dependendo da versão). Fonte: Wikimedia Commons.
+            </figcaption>
+          </figure>
+          <p class="img-hint">
+            Se sua versão for diferente, não tem problema: a lógica é a mesma (células, colunas, linhas e guias).
+          </p>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:18px;">
+        <div class="card">
+          <h3>2) Como abrir o programa</h3>
+          <ul>
+            <li>No Windows: clique em <strong>Iniciar</strong> e digite <strong>Excel</strong>.</li>
+            <li>Ou abra um arquivo <strong>.xlsx</strong> já existente (ele abre no Excel).</li>
+          </ul>
+
+          <div class="callout attn">
+            <div class="title">⚠️ Atenção</div>
+            <div>
+              Algumas empresas usam Excel “online” (Office/365 no navegador). O conteúdo desta apostila também se aplica,
+              mas alguns botões podem estar em lugares levemente diferentes.
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">3) Conhecendo a interface: conceitos essenciais</h3>
+          <ul>
+            <li><strong>Faixa de Opções (Ribbon):</strong> a parte superior com botões (Página Inicial, Inserir, etc.).</li>
+            <li><strong>Planilha:</strong> a “página” com grade (ex.: Plan1). Você pode ter várias planilhas.</li>
+            <li><strong>Pasta de Trabalho:</strong> o arquivo inteiro (ex.: Relatorio.xlsx), que contém uma ou mais planilhas.</li>
+            <li><strong>Linha:</strong> horizontal (1, 2, 3...).</li>
+            <li><strong>Coluna:</strong> vertical (A, B, C...).</li>
+            <li><strong>Célula:</strong> encontro de linha e coluna (ex.: A1, B2).</li>
+          </ul>
+
+          <div class="callout tip">
+            <div class="title">💡 Dica</div>
+            <div>
+              Pense assim: <strong>colunas</strong> são “categorias” (Nome, Data, Valor) e <strong>linhas</strong>
+              são “registros” (cada cliente, cada compra, cada dia).
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Imagem: células, linhas e colunas</h3>
+          <figure>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Microsoft_Office_Excel_2007.png"
+              alt="Imagem do Excel com grade de células e menus; exemplo de linhas e colunas"
+              loading="lazy"
+            />
+            <figcaption>
+              A grade mostra <strong>colunas</strong> (A, B, C...) e <strong>linhas</strong> (1, 2, 3...). Fonte: Wikimedia Commons.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:18px;">
+        <div class="card">
+          <h3>4) Como navegar pelas células</h3>
+          <ul>
+            <li>Clique em uma célula para selecioná-la.</li>
+            <li>Use as setas do teclado para mover a seleção.</li>
+            <li>Use <kbd>Tab</kbd> para ir para a direita e <kbd>Enter</kbd> para descer.</li>
+            <li>Use <kbd>Ctrl</kbd> + setas para pular até o fim de um bloco de dados.</li>
+          </ul>
+
+          <div class="callout example">
+            <div class="title">Exercício rápido (1 minuto)</div>
+            <div>
+              Digite na linha 1: <strong>Nome</strong> em A1, <strong>Data</strong> em B1, <strong>Valor</strong> em C1.
+              Depois use <kbd>Tab</kbd> e <kbd>Enter</kbd> para navegar.
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">5) Como digitar e editar dados</h3>
+          <ul>
+            <li>Para digitar: selecione a célula e comece a escrever.</li>
+            <li>Para editar: dê <strong>duplo clique</strong> na célula ou pressione <kbd>F2</kbd>.</li>
+            <li>Para apagar: selecione e pressione <kbd>Delete</kbd>.</li>
+          </ul>
+
+          <div class="callout attn">
+            <div class="title">⚠️ Atenção</div>
+            <div>
+              Se você digitar <strong>12/05</strong>, o Excel pode entender como data.
+              Se digitar <strong>00123</strong>, ele pode remover os zeros à esquerda.
+              (Mais adiante veremos como formatar corretamente.)
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">6) Como salvar um arquivo (.xlsx)</h3>
+          <ul>
+            <li>Salve frequentemente: <kbd>Ctrl</kbd> + <kbd>S</kbd></li>
+            <li>Primeira vez: escolha <strong>pasta</strong> e <strong>nome</strong> do arquivo.</li>
+            <li>Formato recomendado: <strong>.xlsx</strong></li>
+          </ul>
+
+          <div class="callout tip">
+            <div class="title">💡 Dica de nome</div>
+            <div>
+              Use nomes claros: <strong>Controle_Gastos_2026-05.xlsx</strong> ou <strong>Clientes_Maio.xlsx</strong>.
+              Evite “Planilha1 final final agora vai.xlsx”.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Imagem: salvar arquivo (exemplo)</h3>
+          <figure>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Microsoft_Office_2010_Save_As.png"
+              alt="Exemplo de janela de salvar como (Save As) do Microsoft Office"
+              loading="lazy"
+            />
+            <figcaption>
+              Exemplo de tela “Salvar como”. No Excel, o caminho é semelhante. Fonte: Wikimedia Commons.
+            </figcaption>
+          </figure>
+          <p class="img-hint">
+            Se essa imagem não corresponder exatamente ao seu Excel, procure por “Arquivo &gt; Salvar como”.
+          </p>
+        </div>
+      </div>
+
+      <!-- Exercícios do Módulo 1 -->
+      <div class="card" style="margin-top:18px;">
+        <h3>Exercícios do Módulo 1 (faça no Excel)</h3>
+
+        <h4>Exercício 1 — Criar e salvar uma planilha simples</h4>
+        <p>Crie uma planilha chamada <strong>Agenda</strong> com as colunas abaixo e preencha 5 linhas.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Compromisso</th>
+              <th>Data</th>
+              <th>Hora</th>
+              <th>Local</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ex.: Reunião com cliente</td>
+              <td>12/05/2026</td>
+              <td>10:00</td>
+              <td>Escritório</td>
+            </tr>
+            <tr>
+              <td>Ex.: Pagamento aluguel</td>
+              <td>05/06/2026</td>
+              <td>09:00</td>
+              <td>Online</td>
+            </tr>
+            <tr>
+              <td>Ex.: Treino</td>
+              <td>06/05/2026</td>
+              <td>18:30</td>
+              <td>Academia</td>
+            </tr>
+            <tr>
+              <td>Ex.: Mercado</td>
+              <td>07/05/2026</td>
+              <td>19:30</td>
+              <td>Supermercado</td>
+            </tr>
+            <tr>
+              <td>Ex.: Médico</td>
+              <td>09/05/2026</td>
+              <td>14:00</td>
+              <td>Clínica</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="answer-box">
+          <strong>Espaço para resposta (anotações):</strong>
+          <div>Nome do arquivo salvo: _____________________________</div>
+          <div>Pasta onde salvou: _________________________________</div>
+        </div>
+
+        <details>
+          <summary>Gabarito — passo a passo (Exercício 1)</summary>
+          <ol class="steps">
+            <li>Abra o Excel e crie uma planilha em branco.</li>
+            <li>Em A1, B1, C1, D1 digite: Compromisso, Data, Hora, Local.</li>
+            <li>Preencha as linhas 2 a 6 com dados (pode copiar do exemplo).</li>
+            <li>Salve com <kbd>Ctrl</kbd> + <kbd>S</kbd>.</li>
+            <li>Escolha uma pasta (ex.: Documentos) e nomeie: <strong>Agenda.xlsx</strong>.</li>
+          </ol>
+        </details>
+
+        <h4 style="margin-top:16px;">Exercício 2 — Navegação e edição</h4>
+        <p>
+          Na mesma planilha, corrija 3 informações (altere data/horário/local), usando:
+          <strong>duplo clique</strong> ou <kbd>F2</kbd> para editar, e <kbd>Ctrl</kbd> + <kbd>Z</kbd> para desfazer um erro.
+        </p>
+        <div class="answer-box">
+          <strong>Espaço para resposta (anotações):</strong>
+          <div>Quais células você editou? ______________________________________</div>
+          <div>Você usou desfazer (<kbd>Ctrl</kbd>+<kbd>Z</kbd>)? ( ) Sim ( ) Não</div>
+        </div>
+
+        <details>
+          <summary>Gabarito — passo a passo (Exercício 2)</summary>
+          <ol class="steps">
+            <li>Clique em uma célula que deseja mudar (ex.: B3).</li>
+            <li>Pressione <kbd>F2</kbd> (ou dê duplo clique) e altere o valor.</li>
+            <li>Pressione <kbd>Enter</kbd> para confirmar.</li>
+            <li>Se errou, use <kbd>Ctrl</kbd> + <kbd>Z</kbd> para desfazer e tente novamente.</li>
+          </ol>
+        </details>
+      </div>
+    </section>
+
+    <!-- MÓDULO 2 -->
+    <section class="module" id="modulo2">
+      <div class="module-header">
+        <div>
+          <h2>MÓDULO 2 — Primeiros Passos (Formatação e ajustes)</h2>
+          <p class="subtitle">
+            Objetivo: deixar a planilha legível e “com cara de relatório”: ajustar colunas, usar negrito, cores,
+            alinhamento, bordas e mesclagem (com cuidado).
+          </p>
+        </div>
+        <span class="tag">Nível: Básico</span>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>1) Formatação de células (negrito, itálico, cor, tamanho)</h3>
+          <p>
+            Formatar não muda o “conteúdo”, só muda como ele aparece.
+            Isso ajuda a visualizar cabeçalhos, totais e informações importantes.
+          </p>
+          <ul>
+            <li><strong>Negrito:</strong> destaque do cabeçalho (A1:D1).</li>
+            <li><strong>Cor de preenchimento:</strong> diferenciar seções.</li>
+            <li><strong>Cor da fonte:</strong> cuidado para manter contraste.</li>
+            <li><strong>Tamanho:</strong> título maior, dados padrão.</li>
+          </ul>
+          <div class="callout tip">
+            <div class="title">💡 Dica</div>
+            <div>
+              Padrão prático: cabeçalho com fundo azul claro e texto em negrito.
+              Evite “arco-íris” de cores na planilha.
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">2) Ajustar largura de colunas e altura de linhas</h3>
+          <ul>
+            <li>Coloque o mouse entre as letras das colunas (ex.: entre A e B) e arraste.</li>
+            <li>Para ajuste automático: dê <strong>duplo clique</strong> na borda da coluna.</li>
+          </ul>
+
+          <div class="callout example">
+            <div class="title">Exemplo</div>
+            <div>
+              Se a palavra “Reunião com cliente” está cortada, aumente a coluna A ou use quebra de linha (ver abaixo).
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">3) Mesclar células (use com moderação)</h3>
+          <p>
+            Mesclar junta duas ou mais células em uma só (comum em títulos).
+            <strong>Evite mesclar dentro de tabelas de dados</strong>, pois atrapalha filtros e fórmulas.
+          </p>
+
+          <div class="callout attn">
+            <div class="title">⚠️ Atenção</div>
+            <div>
+              Mesclagem é ótima para um <strong>título</strong> no topo, mas ruim para “linhas de cadastro”.
+              Em tabelas, prefira <strong>Centralizar na seleção</strong> (quando disponível) ou apenas formatação.
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">4) Alinhamento de texto</h3>
+          <ul>
+            <li>Alinhe títulos ao centro (opcional) e dados com bom padrão.</li>
+            <li>Números geralmente ficam melhor à direita; textos, à esquerda.</li>
+            <li>Use <strong>Quebrar texto automaticamente</strong> quando frases ficarem grandes.</li>
+          </ul>
+
+          <h3 style="margin-top:14px;">5) Bordas e cores de preenchimento</h3>
+          <ul>
+            <li>Use bordas leves para delimitar a tabela.</li>
+            <li>Use cor suave no cabeçalho.</li>
+            <li>Se houver total, destaque a linha de total.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Imagens: formatação e bordas (referência visual)</h3>
+          <figure>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/3/30/LibreOffice_Calc_6.0.0.3_screenshot.png"
+              alt="Exemplo de planilha com barra de ferramentas e opções de formatação; semelhante ao Excel em conceitos"
+              loading="lazy"
+            />
+            <figcaption>
+              Exemplo visual de ferramentas de formatação (conceitos equivalentes no Excel). Fonte: Wikimedia Commons.
+            </figcaption>
+          </figure>
+          <p class="img-hint">
+            Observação: a imagem acima pode ser de uma planilha similar (Calc), mas os conceitos são os mesmos:
+            negrito, bordas, alinhamento, cores e ajuste de colunas.
+          </p>
+
+          <div class="callout tip">
+            <div class="title">💡 Dica prática de aparência</div>
+            <div>
+              Uma tabela bonita e simples já é profissional: cabeçalho destacado, bordas finas e colunas ajustadas.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercícios do Módulo 2 -->
+      <div class="card" style="margin-top:18px;">
+        <h3>Exercícios do Módulo 2 (faça no Excel)</h3>
+
+        <h4>Exercício 1 — “Cara de relatório” na planilha Agenda</h4>
+        <p>Aplique na planilha do Módulo 1:</p>
+        <ul>
+          <li>Negrito no cabeçalho (linha 1).</li>
+          <li>Cor de preenchimento suave no cabeçalho (azul claro).</li>
+          <li>Bordas em toda a tabela (A1:D6).</li>
+          <li>Ajuste automático de colunas.</li>
+        </ul>
+
+        <div class="answer-box">
+          <strong>Espaço para resposta (anotações):</strong>
+          <div>O que você achou mais fácil? __________________________________</div>
+          <div>O que deu mais trabalho? _____________________________________</div>
+        </div>
+
+        <details>
+          <summary>Gabarito — passo a passo (Exercício 1)</summary>
+          <ol class="steps">
+            <li>Selecione A1:D1 (cabeçalho).</li>
+            <li>Na guia <strong>Página Inicial</strong>, clique em <strong>Negrito</strong> e escolha <strong>Preenchimento</strong> azul claro.</li>
+            <li>Selecione A1:D6 e aplique <strong>Bordas</strong> (todas as bordas).</li>
+            <li>Para ajustar colunas: selecione colunas A:D e dê duplo clique entre as letras (ex.: entre A e B).</li>
+          </ol>
+        </details>
+
+        <h4 style="margin-top:16px;">Exercício 2 — Título com mesclagem (opcional e recomendado só no topo)</h4>
+        <p>
+          Na linha 1 acima da tabela (ex.: A1:D1), crie um título <strong>AGENDA</strong>.
+          Se preferir, insira uma nova linha no topo e mescle A1:D1 para o título.
+        </p>
+
+        <div class="answer-box">
+          <strong>Espaço para resposta (anotações):</strong>
+          <div>Você mesclou células? ( ) Sim ( ) Não</div>
+          <div>Se sim, onde? ________________________________________________</div>
+        </div>
+
+        <details>
+          <summary>Gabarito — passo a passo (Exercício 2)</summary>
+          <ol class="steps">
+            <li>Clique no número da linha 1 e insira uma linha acima (se quiser título separado).</li>
+            <li>Selecione A1:D1 e clique em <strong>Mesclar e centralizar</strong> (somente para o título).</li>
+            <li>Digite <strong>AGENDA</strong>, aumente a fonte e aplique cor suave.</li>
+          </ol>
+        </details>
+      </div>
+    </section>
+
+    <!-- MÓDULO 3 -->
+    <section class="module" id="modulo3">
+      <div class="module-header">
+        <div>
+          <h2>MÓDULO 3 — Fórmulas Básicas</h2>
+          <p class="subtitle">
+            Objetivo: aprender o que é fórmula, fazer contas simples e usar funções essenciais:
+            SOMA, MÉDIA, MÍNIMO, MÁXIMO e CONT.NÚM.
+          </p>
+        </div>
+        <span class="tag">Nível: Básico → começo do Intermediário</span>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>1) O que é uma fórmula</h3>
+          <p>
+            Uma fórmula é uma instrução para o Excel calcular algo. Toda fórmula começa com <strong>=</strong>.
+          </p>
+
+          <div class="callout example">
+            <div class="title">Exemplo</div>
+            <div>
+              Se você digitar <strong>=2+2</strong> em uma célula e apertar <kbd>Enter</kbd>, o resultado será 4.
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">2) Operações matemáticas básicas</h3>
+          <ul>
+            <li><strong>Somar:</strong> <code>=A1+B1</code></li>
+            <li><strong>Subtrair:</strong> <code>=A1-B1</code></li>
+            <li><strong>Multiplicar:</strong> <code>=A1*B1</code></li>
+            <li><strong>Dividir:</strong> <code>=A1/B1</code></li>
+          </ul>
+
+          <div class="callout attn">
+            <div class="title">⚠️ Atenção</div>
+            <div>
+              Se você digitar “2+2” sem o sinal de igual, o Excel pode tratar como texto.
+              Use sempre <strong>=</strong> no começo.
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">3) Funções essenciais</h3>
+          <p>Funções são “fórmulas prontas”. Exemplos comuns:</p>
+          <ul>
+            <li><strong>SOMA:</strong> soma um intervalo. Ex.: <code>=SOMA(C2:C10)</code></li>
+            <li><strong>MÉDIA:</strong> média. Ex.: <code>=MÉDIA(C2:C10)</code></li>
+            <li><strong>MÍNIMO:</strong> menor valor. Ex.: <code>=MÍNIMO(C2:C10)</code></li>
+            <li><strong>MÁXIMO:</strong> maior valor. Ex.: <code>=MÁXIMO(C2:C10)</code></li>
+            <li><strong>CONT.NÚM:</strong> conta quantas células têm números. Ex.: <code>=CONT.NÚM(C2:C10)</code></li>
+          </ul>
+
+          <h3 style="margin-top:14px;">4) Referência de células (A1, B2...)</h3>
+          <p>
+            Quando você usa <code>A1</code> numa fórmula, está dizendo: “use o valor que está na célula A1”.
+            Isso permite que o Excel recalcule automaticamente quando os dados mudarem.
+          </p>
+
+          <h3 style="margin-top:14px;">5) Referência relativa x absoluta</h3>
+          <ul>
+            <li><strong>Relativa (A1):</strong> muda quando você copia a fórmula para outra célula.</li>
+            <li><strong>Absoluta ($A$1):</strong> fica fixa quando você copia a fórmula.</li>
+          </ul>
+
+          <div class="callout example">
+            <div class="title">Exemplo prático (comissão)</div>
+            <div>
+              Se a taxa de comissão está em B1 (por exemplo, 10%), e você quer multiplicar todas as vendas por essa taxa,
+              use <strong>$B$1</strong> para manter a taxa fixa ao copiar a fórmula.
+            </div>
+          </div>
+
+          <div class="callout tip">
+            <div class="title">💡 Atalho</div>
+            <div>
+              Ao editar uma referência, use <kbd>F4</kbd> para alternar entre A1 → $A$1 → A$1 → $A1 (dependendo da versão).
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Imagem: exemplo de grade e fórmulas</h3>
+          <figure>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/8/86/Microsoft_Excel_2010.png"
+              alt="Captura de tela do Excel com barra de fórmulas e planilha; ilustra onde aparecem as fórmulas"
+              loading="lazy"
+            />
+            <figcaption>
+              A barra de fórmulas mostra o que foi digitado (ex.: =SOMA(...)). Fonte: Wikimedia Commons.
+            </figcaption>
+          </figure>
+
+          <div class="callout tip" style="margin-top:12px;">
+            <div class="title">💡 Onde olhar</div>
+            <div>
+              Se uma célula mostra “150”, mas você quer ver a fórmula, clique nela e observe a barra de fórmulas.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercícios do Módulo 3 -->
+      <div class="card" style="margin-top:18px;">
+        <h3>Exercícios do Módulo 3 (faça no Excel)</h3>
+
+        <h4>Exercício 1 — Controle de gastos (SOMA, MÉDIA, MÍNIMO, MÁXIMO)</h4>
+        <p>Crie a planilha abaixo e calcule os totais:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Categoria</th>
+              <th>Valor (R$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>02/05/2026</td><td>Mercado</td><td>125,90</td></tr>
+            <tr><td>03/05/2026</td><td>Transporte</td><td>22,50</td></tr>
+            <tr><td>03/05/2026</td><td>Alimentação</td><td>38,00</td></tr>
+            <tr><td>04/05/2026</td><td>Saúde</td><td>75,00</td></tr>
+            <tr><td>05/05/2026</td><td>Outros</td><td>15,00</td></tr>
+          </tbody>
+        </table>
+
+        <p>Agora, abaixo da lista, crie:</p>
+        <ul>
+          <li><strong>Total:</strong> use <code>=SOMA(</code>...<code>)</code></li>
+          <li><strong>Média:</strong> <code>=MÉDIA(</code>...<code>)</code></li>
+          <li><strong>Menor valor:</strong> <code>=MÍNIMO(</code>...<code>)</code></li>
+          <li><strong>Maior valor:</strong> <code>=MÁXIMO(</code>...<code>)</code></li>
+        </ul>
+
+        <div class="answer-box">
+          <strong>Espaço para resposta (anotações):</strong>
+          <div>Total (R$): _____________________</div>
+          <div>Média (R$): _____________________</div>
+          <div>Menor (R$): _____________________</div>
+          <div>Maior (R$): _____________________</div>
+        </div>
+
+        <details>
+          <summary>Gabarito — passo a passo (Exercício 1)</summary>
+          <ol class="steps">
+            <li>Digite os dados em colunas (por exemplo, A1:C6 com cabeçalho na linha 1).</li>
+            <li>Na célula C8 (ou onde preferir), calcule o total: <strong>=SOMA(C2:C6)</strong></li>
+            <li>Calcule a média: <strong>=MÉDIA(C2:C6)</strong></li>
+            <li>Menor valor: <strong>=MÍNIMO(C2:C6)</strong></li>
+            <li>Maior valor: <strong>=MÁXIMO(C2:C6)</strong></li>
+          </ol>
+        </details>
+
+        <h4 style="margin-top:16px;">Exercício 2 — Referência absoluta (taxa fixa)</h4>
+        <p>Monte a tabela e calcule o valor com taxa:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Preço (R$)</th>
+              <th>Taxa (%)</th>
+              <th>Preço com taxa (R$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Caneta</td><td>3,50</td><td>10%</td><td>(calcular)</td></tr>
+            <tr><td>Caderno</td><td>18,00</td><td>10%</td><td>(calcular)</td></tr>
+            <tr><td>Mochila</td><td>120,00</td><td>10%</td><td>(calcular)</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          Coloque a taxa em uma célula única (por exemplo, <strong>C2</strong>) e use referência absoluta ao copiar a fórmula
+          para as outras linhas. Uma forma: <strong>=B2*(1+$C$2)</strong> (se C2 tiver 10%).
+        </p>
+
+        <div class="answer-box">
+          <strong>Espaço para resposta (anotações):</strong>
+          <div>Fórmula usada: ________________________________________________</div>
+          <div>Você usou $ (absoluto)? _______________________________________</div>
+        </div>
+
+        <details>
+          <summary>Gabarito — passo a passo (Exercício 2)</summary>
+          <ol class="steps">
+            <li>Digite os produtos e preços.</li>
+            <li>Coloque a taxa em uma célula (ex.: C2 = 10%).</li>
+            <li>Em D2, digite: <strong>=B2*(1+$C$2)</strong></li>
+            <li>Copie a fórmula para baixo (D3, D4). O <strong>$C$2</strong> deve permanecer fixo.</li>
+          </ol>
+        </details>
+      </div>
+    </section>
+
+    <!-- MÓDULO 4 -->
+    <section class="module" id="modulo4">
+      <div class="module-header">
+        <div>
+          <h2>MÓDULO 4 — Funções Intermediárias</h2>
+          <p class="subtitle">
+            Objetivo: aprender funções muito usadas no trabalho: SE, PROCV, CONT.SE, SOMASE e CONCATENAR (ou &).
+            Você vai montar mini-casos com dados e aplicar cada função.
+          </p>
+        </div>
+        <span class="tag">Nível: Intermediário</span>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>1) Função SE</h3>
+          <p>
+            A função <strong>SE</strong> faz uma pergunta lógica:
+            “Se algo for verdadeiro, mostre X; senão, mostre Y”.
+          </p>
+          <div class="callout example">
+            <div class="title">Exemplo</div>
+            <div>
+              <code>=SE(C2&gt;=60;"Aprovado";"Reprovado")</code>
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">2) Função PROCV (VLOOKUP)</h3>
+          <p>
+            A <strong>PROCV</strong> procura um valor na primeira coluna de uma tabela e retorna um valor relacionado.
+            Muito usada para buscar <strong>preço pelo código</strong> ou <strong>nome pelo ID</strong>.
+          </p>
+          <div class="callout attn">
+            <div class="title">⚠️ Atenção</div>
+            <div>
+              Para começar, use PROCV com correspondência exata: o último argumento como <strong>FALSO</strong>.
+            </div>
+          </div>
+          <div class="callout example">
+            <div class="title">Exemplo</div>
+            <div>
+              <code>=PROCV(A2;TabelaPrecos!A:B;2;FALSO)</code>
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">3) Função CONT.SE</h3>
+          <p>
+            Conta quantas células atendem a um critério.
+          </p>
+          <div class="callout example">
+            <div class="title">Exemplo</div>
+            <div>
+              <code>=CONT.SE(B2:B20;"Pago")</code>
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">4) Função SOMASE</h3>
+          <p>
+            Soma valores apenas quando um critério é atendido.
+          </p>
+          <div class="callout example">
+            <div class="title">Exemplo</div>
+            <div>
+              <code>=SOMASE(B2:B20;"Mercado";C2:C20)</code>
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">5) CONCATENAR / &</h3>
+          <p>
+            Junta textos. Em versões modernas, existe <strong>CONCAT</strong> ou <strong>TEXTO.JUNTAR</strong>.
+            A forma simples e universal é usar <strong>&amp;</strong>.
+          </p>
+          <div class="callout example">
+            <div class="title">Exemplo</div>
+            <div>
+              <code>=A2 &amp; " - " &amp; B2</code>
+            </div>
+          </div>
+
+          <div class="callout tip">
+            <div class="title">💡 Dica</div>
+            <div>
+              Se o Excel do seu computador usar <strong>ponto e vírgula</strong> como separador (<code>;</code>), use assim.
+              Se usar vírgula (<code>,</code>), adapte. No Brasil, geralmente é <code>;</code>.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Imagem: exemplo de função e barra de fórmulas</h3>
+          <figure>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/1/13/Microsoft_Excel_2016.png"
+              alt="Captura de tela do Microsoft Excel com grade e barra de fórmulas, útil para visualizar funções"
+              loading="lazy"
+            />
+            <figcaption>
+              A barra de fórmulas é onde você confere a função digitada (SE, PROCV, etc.). Fonte: Wikimedia Commons.
+            </figcaption>
+          </figure>
+          <div class="callout tip" style="margin-top:12px;">
+            <div class="title">💡 Prática essencial</div>
+            <div>
+              Digite a função devagar, confirme se os parênteses fecharam, e leia em voz alta:
+              “SE isso acontecer, então..., senão...”.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercícios do Módulo 4 -->
+      <div class="card" style="margin-top:18px;">
+        <h3>Exercícios do Módulo 4 (faça no Excel)</h3>
+
+        <h4>Exercício 1 — SE (situação do aluno)</h4>
+        <p>Crie uma tabela e classifique a situação:</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Aluno</th>
+              <th>Nota</th>
+              <th>Situação (usar SE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Ana</td><td>75</td><td>(calcular)</td></tr>
+            <tr><td>Bruno</td><td>58</td><td>(calcular)</td></tr>
+            <tr><td>Carla</td><td>90</td><td>(calcular)</td></tr>
+            <tr><td>Diego</td><td>60</td><td>(calcular)</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          Regra: se a nota for maior ou igual a 60 → <strong>Aprovado</strong>, senão → <strong>Reprovado</strong>.
+        </p>
+
+        <div class="answer-box">
+          <strong>Espaço para resposta (anotações):</strong>
+          <div>Fórmula usada (em C2): ________________________________________</div>
+        </div>
+
+        <details>
+          <summary>Gabarito — passo a passo (Exercício 1)</summary>
+          <ol class="steps">
+            <li>Digite a tabela (A1:C5) com cabeçalho.</li>
+            <li>Em C2, digite: <strong>=SE(B2&gt;=60;"Aprovado";"Reprovado")</strong></li>
+            <li>Copie a fórmula para C3:C5.</li>
+          </ol>
+        </details>
+
+        <h4 style="margin-top:16px;">Exercício 2 — PROCV (buscar preço pelo código)</h4>
+        <p>Crie duas áreas na mesma planilha:</p>
+
+        <p><strong>Tabela de preços (ex.: F1:G5)</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Preço (R$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>P001</td><td>3,50</td></tr>
+            <tr><td>P002</td><td>18,00</td></tr>
+            <tr><td>P003</td><td>120,00</td></tr>
+            <tr><td>P004</td><td>9,90</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>Pedidos (ex.: A1:C6)</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Quantidade</th>
+              <th>Preço (usar PROCV)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>P001</td><td>10</td><td>(calcular)</td></tr>
+            <tr><td>P003</td><td>1</td><td>(calcular)</td></tr>
+            <tr><td>P004</td><td>3</td><td>(calcular)</td></tr>
+            <tr><td>P002</td><td>2</td><td>(calcular)</td></tr>
+            <tr><td>P001</td><td>5</td><td>(calcular)</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          Em “Preço”, busque o valor na tabela de preços usando PROCV.
+          Dica de formato: <code>=PROCV(A2;$F$2:$G$5;2;FALSO)</code>
+        </p>
+
+        <div class="answer-box">
+          <strong>Espaço para resposta (anotações):</strong>
+          <div>Fórmula usada (em C2): ________________________________________</div>
+          <div>Você travou a tabela com $ (ex.: $F$2:$G$5)? ________________</div>
+        </div>
+
+        <details>
+          <summary>Gabarito — passo a passo (Exercício 2)</summary>
+          <ol class="steps">
+            <li>Monte a tabela de preços em F2:G5, com cabeçalho em F1:G1.</li>
+            <li>Monte a tabela de pedidos em A2:C6, com cabeçalho em A1:C1.</li>
+            <li>Em C2, digite: <strong>=PROCV(A2;$F$2:$G$5;2;FALSO)</strong></li>
+            <li>Copie a fórmula para baixo (C3:C6).</li>
+            <li>Se aparecer erro, verifique se o código existe e se a tabela começa na coluna do código.</li>
+          </ol>
+        </details>
+
+        <div class="callout tip" style="margin-top:12px;">
+          <div class="title">💡 Bônus (treino extra)</div>
+          <div>
+            Use <strong>CONT.SE</strong> para contar quantos pedidos são do código P001
+            e <strong>SOMASE</strong> para somar quantidades de um código específico.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MÓDULO 5 -->
+    <section class="module" id="modulo5">
+      <div class="module-header">
+        <div>
+          <h2>MÓDULO 5 — Organização e Apresentação de Dados</h2>
+          <p class="subtitle">
+            Objetivo: transformar dados “crus” em uma planilha organizada:
+            classificar, filtrar, usar formatação condicional, criar tabelas e gráficos simples, e congelar painéis.
+          </p>
+        </div>
+        <span class="tag">Nível: Intermediário</span>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>1) Classificar e filtrar dados</h3>
+          <ul>
+            <li><strong>Classificar:</strong> ordenar por data, nome, valor (crescente/decrescente).</li>
+            <li><strong>Filtrar:</strong> mostrar somente o que você quer (ex.: apenas “Mercado”).</li>
+          </ul>
+          <div class="callout attn">
+            <div class="title">⚠️ Atenção</div>
+            <div>
+              Antes de classificar, selecione a tabela inteira (incluindo cabeçalho) para não “embaralhar” colunas.
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">2) Formatação condicional</h3>
+          <p>
+            Destaca automaticamente valores (ex.: valores acima de R$ 100 ficam vermelhos).
+          </p>
+          <div class="callout example">
+            <div class="title">Exemplo</div>
+            <div>
+              “Se Valor &gt; 100” → preencher com cor.
+            </div>
+          </div>
+
+          <h3 style="margin-top:14px;">3) Criar tabelas (Inserir &gt; Tabela)</h3>
+          <p>
+            Transformar um intervalo em <strong>Tabela</strong> facilita filtro, estilo, e fórmulas que acompanham novas linhas.
+          </p>
+          <ul>
+            <li>Selecione seu intervalo</li>
+            <li>Inserir → Tabela</li>
+            <li>Marque “Minha tabela tem cabeçalhos”</li>
+          </ul>
+
+          <h3 style="margin-top:14px;">4) Criar gráficos simples</h3>
+          <p>Gráficos comuns para iniciantes:</p>
+          <ul>
+            <li><strong>Barras/colunas:</strong> comparar categorias.</li>
+            <li><strong>Linha:</strong> evolução no tempo (por dia/mês).</li>
+            <li><strong>Pizza:</strong> participação (use com poucos itens).</li>
+          </ul>
+
+          <h3 style="margin-top:14px;">5) Congelar painéis</h3>
+          <p>
+            Mantém o cabeçalho visível enquanto você rola para baixo.
+          </p>
+          <div class="callout tip">
+            <div class="title">💡 Dica</div>
+            <div>
+              Para congelar a linha 1: Exibir → Congelar Painéis → Congelar Linha Superior.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Imagens: filtro e gráficos (referência)</h3>
+          <figure>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Microsoft_Excel_2019_screenshot.png"
+              alt="Captura de tela do Excel com dados e elementos típicos para análise; referência para tabelas e gráficos"
+              loading="lazy"
+            />
+            <figcaption>
+              Exemplo de planilha com recursos típicos de análise (tabelas, gráficos e formatação). Fonte: Wikimedia Commons.
+            </figcaption>
+          </figure>
+
+          <div class="callout tip" style="margin-top:12px;">
+            <div class="title">💡 Regra de ouro</div>
+            <div>
+              Primeiro organize (tabela limpa), depois filtre/classifique, depois formate, e só então faça gráfico.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercícios do Módulo 5 -->
+      <div class="card" style="margin-top:18px;">
+        <h3>Exercícios do Módulo 5 (faça no Excel)</h3>
+
+        <h4>Exercício 1 — Classificar, filtrar e congelar</h4>
+        <p>Use a planilha de gastos do Módulo 3 e faça:</p>
+        <ul>
+          <li>Transforme o intervalo em <strong>Tabela</strong> (Inserir &gt; Tabela).</li>
+          <li><strong>Classifique</strong> por Valor do maior para o menor.</li>
+          <li><strong>Filtre</strong> para mostrar somente uma categoria (ex.: Mercado).</li>
+          <li><strong>Congele</strong> o cabeçalho (linha superior) para continuar visível.</li>
+        </ul>
+
+        <div class="answer-box">
+          <strong>Espaço para resposta (anotações):</strong>
+          <div>Qual filtro você aplicou? _______________________________________</div>
+          <div>Qual foi o maior valor após classificar? _________________________</div>
+        </div>
+
+        <details>
+          <summary>Gabarito — passo a passo (Exercício 1)</summary>
+          <ol class="steps">
+            <li>Selecione o intervalo com cabeçalhos.</li>
+            <li>Vá em <strong>Inserir</strong> → <strong>Tabela</strong> → confirme “Minha tabela tem cabeçalhos”.</li>
+            <li>Use o filtro do cabeçalho da coluna Valor para classificar do maior para o menor.</li>
+            <li>Use o filtro da coluna Categoria para selecionar apenas “Mercado”.</li>
+            <li>Exibir → Congelar Painéis → Congelar Linha Superior.</li>
+          </ol>
+        </details>
+
+        <h4 style="margin-top:16px;">Exercício 2 — Formatação condicional + gráfico</h4>
+        <p>
+          Ainda na tabela de gastos:
+        </p>
+        <ul>
+          <li>Aplique <strong>Formatação Condicional</strong> para destacar valores acima de R$ 50.</li>
+          <li>Crie um gráfico de colunas mostrando <strong>Valor por categoria</strong> (se necessário, faça um resumo simples).</li>
+        </ul>
+
+        <div class="callout attn">
+          <div class="title">⚠️ Atenção</div>
+          <div>
+            Para “valor por categoria”, você pode precisar criar uma pequena tabela de resumo (Categoria / Total),
+            usando <strong>SOMASE</strong> (do módulo anterior).
+          </div>
+        </div>
+
+        <div class="answer-box">
+          <strong>Espaço para resposta (anotações):</strong>
+          <div>Quantos valores ficaram destacados? _____________________________</div>
+          <div>Tipo de gráfico escolhido: ______________________________________</div>
+        </div>
+
+        <details>
+          <summary>Gabarito — passo a passo (Exercício 2)</summary>
+          <ol class="steps">
+            <li>Selecione a coluna de valores (sem o cabeçalho).</li>
+            <li>Página Inicial → Formatação Condicional → Regras de Realce → Maior que… → 50.</li>
+            <li>Crie uma tabela de resumo (ex.: Mercado, Transporte, etc.) e use <strong>SOMASE</strong> para totalizar por categoria.</li>
+            <li>Selecione a tabela de resumo e vá em Inserir → Gráfico de Colunas.</li>
+          </ol>
+        </details>
+      </div>
+    </section>
+
+    <!-- MÓDULO 6 -->
+    <section class="module" id="modulo6">
+      <div class="module-header">
+        <div>
+          <h2>MÓDULO 6 — Exercícios Práticos (Consolidado)</h2>
+          <p class="subtitle">
+            Objetivo: juntar tudo em cenários mais próximos do trabalho.
+            Faça com calma. O foco é criar uma planilha limpa, com cálculos, função e apresentação.
+          </p>
+        </div>
+        <span class="tag">Nível: Revisão + prática</span>
+      </div>
+
+      <div class="card">
+        <h3>Exercício 1 — Controle de Vendas com Comissão</h3>
+        <p>
+          Crie uma planilha com as colunas: <strong>Data</strong>, <strong>Vendedor</strong>, <strong>Produto</strong>,
+          <strong>Quantidade</strong>, <strong>Preço Unit.</strong>, <strong>Total</strong>, <strong>Comissão</strong>.
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Vendedor</th>
+              <th>Produto</th>
+              <th>Qtd</th>
+              <th>Preço Unit. (R$)</th>
+              <th>Total (R$)</th>
+              <th>Comissão (R$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>01/05/2026</td><td>Maria</td><td>Caneta</td><td>10</td><td>3,50</td><td>(calc)</td><td>(calc)</td></tr>
+            <tr><td>02/05/2026</td><td>João</td><td>Caderno</td><td>2</td><td>18,00</td><td>(calc)</td><td>(calc)</td></tr>
+            <tr><td>03/05/2026</td><td>Maria</td><td>Mochila</td><td>1</td><td>120,00</td><td>(calc)</td><td>(calc)</td></tr>
+            <tr><td>03/05/2026</td><td>Ana</td><td>Caneta</td><td>5</td><td>3,50</td><td>(calc)</td><td>(calc)</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          Regras:
+        </p>
+        <ul>
+          <li><strong>Total</strong> = Qtd * Preço Unit.</li>
+          <li>A <strong>taxa de comissão</strong> fica em uma célula única (ex.: 5% em J1).</li>
+          <li><strong>Comissão</strong> = Total * taxa (use referência absoluta, ex.: <code>$J$1</code>).</li>
+          <li>Formate valores em moeda e aplique bordas/cabeçalho.</li>
+        </ul>
+
+        <div class="answer-box">
+          <strong>Espaço para resposta (anotações):</strong>
+          <div>Onde colocou a taxa de comissão? ________________________________</div>
+          <div>Fórmula do Total: ______________________________________________</div>
+          <div>Fórmula da Comissão (com $): ___________________________________</div>
+        </div>
+
+        <details>
+          <summary>Gabarito — passo a passo (Exercício 1)</summary>
+          <ol class="steps">
+            <li>Digite os dados e crie as colunas.</li>
+            <li>Coloque a taxa (ex.: 5%) em uma célula (J1, por exemplo).</li>
+            <li>Na coluna Total: <strong>=D2*E2</strong> (ajuste as colunas conforme sua planilha).</li>
+            <li>Na coluna Comissão: <strong>=F2*$J$1</strong> (se F for Total).</li>
+            <li>Copie as fórmulas para as demais linhas.</li>
+            <li>Formate como moeda e aplique estilo de tabela.</li>
+          </ol>
+        </details>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <h3>Exercício 2 — Cadastro + PROCV (busca de dados) + SE (status)</h3>
+        <p>
+          Monte um <strong>cadastro de clientes</strong> e uma <strong>tabela de status</strong>:
+        </p>
+
+        <p><strong>Cadastro (ex.: A1:D6)</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Cliente</th>
+              <th>Cidade</th>
+              <th>Ativo?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>C001</td><td>Loja Sol</td><td>Fortaleza</td><td>Sim</td></tr>
+            <tr><td>C002</td><td>Mercado Mar</td><td>Fortaleza</td><td>Não</td></tr>
+            <tr><td>C003</td><td>Papelaria Azul</td><td>Caucaia</td><td>Sim</td></tr>
+            <tr><td>C004</td><td>Oficina Norte</td><td>Maracanaú</td><td>Sim</td></tr>
+            <tr><td>C005</td><td>Farmácia Centro</td><td>Fortaleza</td><td>Não</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>Consulta (ex.: F1:H4)</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>ID para buscar</th>
+              <th>Nome (PROCV)</th>
+              <th>Status (SE)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>C002</td><td>(calcular)</td><td>(calcular)</td></tr>
+            <tr><td>C004</td><td>(calcular)</td><td>(calcular)</td></tr>
+            <tr><td>C005</td><td>(calcular)</td><td>(calcular)</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          Regras:
+        </p>
+        <ul>
+          <li>Use <strong>PROCV</strong> para trazer o nome do cliente a partir do ID.</li>
+          <li>Use <strong>PROCV</strong> para trazer “Ativo?” e depois use <strong>SE</strong>:
+            se “Sim” → “OK”; se “Não” → “Inativo”.</li>
+        </ul>
+
+        <div class="answer-box">
+          <strong>Espaço para resposta (anotações):</strong>
+          <div>Fórmula PROCV (Nome): ________________________________________</div>
+          <div>Fórmula SE (Status): __________________________________________</div>
+        </div>
+
+        <details>
+          <summary>Gabarito — passo a passo (Exercício 2)</summary>
+          <ol class="steps">
+            <li>Monte o cadastro em A1:D6.</li>
+            <li>Na consulta, em G2 (Nome), use PROCV para buscar na tabela:
+              <strong>=PROCV(F2;$A$2:$D$6;2;FALSO)</strong></li>
+            <li>Para o status, primeiro busque “Ativo?” com PROCV (coluna 4) ou faça direto dentro do SE.</li>
+            <li>Exemplo direto (em H2):
+              <strong>=SE(PROCV(F2;$A$2:$D$6;4;FALSO)="Sim";"OK";"Inativo")</strong></li>
+            <li>Copie para baixo.</li>
+          </ol>
+        </details>
+
+        <div class="callout tip" style="margin-top:12px;">
+          <div class="title">💡 Fechamento (o que significa “intermediário” aqui)</div>
+          <div>
+            Você já consegue: formatar bem, criar tabelas, fazer SOMA/MÉDIA, usar SE e PROCV, filtrar/classificar
+            e criar um gráfico simples. Isso resolve grande parte das tarefas de escritório.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="no-print" style="margin-top:18px; color:#64748b; font-size:13px;">
+      <strong>Para transformar em PDF:</strong> abra este HTML no navegador → <kbd>Ctrl</kbd> + <kbd>P</kbd> → “Salvar como PDF”.
+      Se quiser, ative “Cabeçalhos e rodapés” do navegador (opcional).
+    </div>
+  </div>
+
+  <!-- Rodapé fixo durante impressão -->
+  <footer class="print-footer">
+    Excel do Básico ao Intermediário — Material de Treinamento (HTML → PDF)
+  </footer>
+</body>
+</html>
